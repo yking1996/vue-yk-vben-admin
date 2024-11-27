@@ -1,32 +1,24 @@
 <script lang="ts" setup>
-import type { VbenFormSchema } from '@vben/common-ui';
-import type { BasicOption } from '@vben/types';
+import type { VbenFormSchema } from '@vben/common-ui'
+import type { BasicOption } from '@vben/types'
 
-import { computed, markRaw } from 'vue';
+import { computed } from 'vue'
 
-import { AuthenticationLogin, SliderCaptcha, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { AuthenticationLogin, z } from '@vben/common-ui'
+import { $t } from '@vben/locales'
 
-import { useAuthStore } from '#/store';
+import { useAuthStore } from '#/store'
 
-defineOptions({ name: 'Login' });
+defineOptions({ name: 'Login' })
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
-    label: 'Super',
-    value: 'vben',
-  },
-  {
-    label: 'Admin',
+    label: 'admin',
     value: 'admin',
   },
-  {
-    label: 'User',
-    value: 'jack',
-  },
-];
+]
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
@@ -42,7 +34,7 @@ const formSchema = computed((): VbenFormSchema[] => {
         .string()
         .min(1, { message: $t('authentication.selectAccount') })
         .optional()
-        .default('vben'),
+        .default('admin'),
     },
     {
       component: 'VbenInput',
@@ -54,12 +46,12 @@ const formSchema = computed((): VbenFormSchema[] => {
           if (values.selectAccount) {
             const findUser = MOCK_USER_OPTIONS.find(
               (item) => item.value === values.selectAccount,
-            );
+            )
             if (findUser) {
               form.setValues({
-                password: '123456',
+                password: 'Admin1234',
                 username: findUser.value,
-              });
+              })
             }
           }
         },
@@ -78,15 +70,15 @@ const formSchema = computed((): VbenFormSchema[] => {
       label: $t('authentication.password'),
       rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
-    {
-      component: markRaw(SliderCaptcha),
-      fieldName: 'captcha',
-      rules: z.boolean().refine((value) => value, {
-        message: $t('authentication.verifyRequiredTip'),
-      }),
-    },
-  ];
-});
+    // {
+    //   component: markRaw(SliderCaptcha),
+    //   fieldName: 'captcha',
+    //   rules: z.boolean().refine((value) => value, {
+    //     message: $t('authentication.verifyRequiredTip'),
+    //   }),
+    // },
+  ]
+})
 </script>
 
 <template>

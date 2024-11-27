@@ -1,4 +1,4 @@
-import { defineConfig } from '@vben/vite-config';
+import { defineConfig } from '@vben/vite-config'
 
 export default defineConfig(async () => {
   return {
@@ -6,15 +6,36 @@ export default defineConfig(async () => {
     vite: {
       server: {
         proxy: {
-          '/api': {
+          '/sh-back-manage': {
             changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, ''),
-            // mock代理目标地址
-            target: 'http://localhost:5320/api',
-            ws: true,
+            rewrite: (path) =>
+              path.replace(/^\/sh-back-manage/, '/sh-back-manage'),
+            target: 'http://api.sh.dev.mall-xy.com',
+            ws: false,
+          },
+          '/sh-common-center': {
+            changeOrigin: true,
+            rewrite: (path) =>
+              path.replace(/^\/sh-common-center/, '/sh-common-center'),
+            target: 'http://api.sh.dev.mall-xy.com',
+            ws: false,
+          },
+          '/sh-user-center': {
+            changeOrigin: true,
+            rewrite: (path) =>
+              path.replace(/^\/sh-user-center/, '/sh-user-center'),
+            target: 'http://api.sh.dev.mall-xy.com',
+            ws: false,
+          },
+          '/xyj': {
+            changeOrigin: true,
+            rewrite: (path) =>
+              path.replace(/^\/sh-back-manage/, '/sh-back-manage'),
+            target: 'https://oss.dev.mall-xy.com/xyj',
+            ws: false,
           },
         },
       },
     },
-  };
-});
+  }
+})

@@ -2,44 +2,46 @@ import type {
   AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
-} from 'axios';
+} from 'axios'
 
-type RequestResponse<T = any> = AxiosResponse<T>;
+type RequestResponse<T = any> = AxiosResponse<T>
 
 type RequestContentType =
   | 'application/json;charset=utf-8'
   | 'application/octet-stream;charset=utf-8'
   | 'application/x-www-form-urlencoded;charset=utf-8'
-  | 'multipart/form-data;charset=utf-8';
+  | 'multipart/form-data;charset=utf-8'
 
-type RequestClientOptions = CreateAxiosDefaults;
+type RequestClientOptions = CreateAxiosDefaults
 
 interface RequestInterceptorConfig {
   fulfilled?: (
     config: InternalAxiosRequestConfig,
   ) =>
     | InternalAxiosRequestConfig<any>
-    | Promise<InternalAxiosRequestConfig<any>>;
-  rejected?: (error: any) => any;
+    | Promise<InternalAxiosRequestConfig<any>>
+  rejected?: (error: any) => any
 }
 
 interface ResponseInterceptorConfig<T = any> {
   fulfilled?: (
     response: AxiosResponse<T>,
-  ) => AxiosResponse | Promise<AxiosResponse>;
-  rejected?: (error: any) => any;
+  ) => AxiosResponse | Promise<AxiosResponse>
+  rejected?: (error: any) => any
 }
 
-type MakeErrorMessageFn = (message: string, error: any) => void;
+type MakeErrorMessageFn = (message: string, error: any) => void
 
 interface HttpResponse<T = any> {
   /**
    * 0 表示成功 其他表示失败
    * 0 means success, others means fail
    */
-  code: number;
-  data: T;
-  message: string;
+  code: number
+  result: T
+  message: string
+  traceId: string
+  type: string
 }
 
 export type {
@@ -50,4 +52,4 @@ export type {
   RequestInterceptorConfig,
   RequestResponse,
   ResponseInterceptorConfig,
-};
+}
