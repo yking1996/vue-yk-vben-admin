@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { $t } from '@vben/locales';
+import { $t } from '@vben/locales'
 
-import NumberFieldItem from '../number-field-item.vue';
-import SwitchItem from '../switch-item.vue';
+import NumberFieldItem from '../number-field-item.vue'
+import SwitchItem from '../switch-item.vue'
 
-defineProps<{ disabled: boolean }>();
+defineProps<{ disabled: boolean }>()
 
-const sidebarEnable = defineModel<boolean>('sidebarEnable');
-const sidebarWidth = defineModel<number>('sidebarWidth');
+const sidebarEnable = defineModel<boolean>('sidebarEnable')
+const sidebarWidth = defineModel<number>('sidebarWidth')
 const sidebarCollapsedShowTitle = defineModel<boolean>(
   'sidebarCollapsedShowTitle',
-);
-const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed');
+)
+const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed')
 </script>
 
 <template>

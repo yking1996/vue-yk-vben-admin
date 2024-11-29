@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
 import {
   VBEN_DOC_URL,
@@ -6,10 +6,10 @@ import {
   VBEN_GITHUB_URL,
   VBEN_LOGO_URL,
   VBEN_NAIVE_PREVIEW_URL,
-} from '@vben/constants';
+} from '@vben/constants'
 
-import { BasicLayout, IFrameView } from '#/layouts';
-import { $t } from '#/locales';
+import { BasicLayout, IFrameView } from '#/layouts'
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -76,6 +76,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

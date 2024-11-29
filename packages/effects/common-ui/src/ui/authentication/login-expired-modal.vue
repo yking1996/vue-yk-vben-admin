@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import type { AuthenticationProps } from './types';
+import type { AuthenticationProps } from './types'
 
-import { watch } from 'vue';
+import { watch } from 'vue'
 
-import { useVbenModal } from '@vben-core/popup-ui';
-import { Slot, VbenAvatar } from '@vben-core/shadcn-ui';
+import { useVbenModal } from '@vben-core/popup-ui'
+import { Slot, VbenAvatar } from '@vben-core/shadcn-ui'
 
 interface Props extends AuthenticationProps {
-  avatar?: string;
+  avatar?: string
 }
 
 defineOptions({
   name: 'LoginExpiredModal',
-});
+})
 
 withDefaults(defineProps<Props>(), {
   avatar: '',
-});
+})
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>('open')
 
-const [Modal, modalApi] = useVbenModal();
+const [Modal, modalApi] = useVbenModal()
 
 watch(
   () => open.value,
   (val) => {
-    modalApi.setState({ isOpen: val });
+    modalApi.setState({ isOpen: val })
   },
-);
+)
 </script>
 
 <template>

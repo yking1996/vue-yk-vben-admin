@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { Primitive, type PrimitiveProps } from 'radix-vue'
 
 const props = withDefaults(defineProps<{ class?: any } & PrimitiveProps>(), {
   as: 'a',
-});
+})
 </script>
 
 <template>

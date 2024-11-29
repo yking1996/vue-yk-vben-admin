@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, useTemplateRef, watch, watchEffect } from 'vue';
+import { ref, useTemplateRef, watch, watchEffect } from 'vue'
 
-import { usePagination } from '@vben/hooks';
-import { EmptyIcon, Grip } from '@vben/icons';
+import { usePagination } from '@vben/hooks'
+import { EmptyIcon, Grip } from '@vben/icons'
 import {
   Button,
   Pagination,
@@ -16,72 +16,72 @@ import {
   VbenIcon,
   VbenIconButton,
   VbenPopover,
-} from '@vben-core/shadcn-ui';
+} from '@vben-core/shadcn-ui'
 
 interface Props {
-  value?: string;
-  pageSize?: number;
+  value?: string
+  pageSize?: number
   /**
    * 图标列表
    */
-  icons?: string[];
+  icons?: string[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
   value: '',
   pageSize: 36,
   icons: () => [],
-});
+})
 
 const emit = defineEmits<{
-  change: [string];
-  'update:value': [string];
-}>();
+  change: [string]
+  'update:value': [string]
+}>()
 
-const refTrigger = useTemplateRef<HTMLElement>('refTrigger');
-const currentSelect = ref('');
-const currentList = ref(props.icons);
-const currentPage = ref(1);
+const refTrigger = useTemplateRef<HTMLElement>('refTrigger')
+const currentSelect = ref('')
+const currentList = ref(props.icons)
+const currentPage = ref(1)
 
 watch(
   () => props.icons,
   (newIcons) => {
-    currentList.value = newIcons;
+    currentList.value = newIcons
   },
   { immediate: true },
-);
+)
 
 const { paginationList, total, setCurrentPage } = usePagination(
   currentList,
   props.pageSize,
-);
+)
 
 watchEffect(() => {
-  currentSelect.value = props.value;
-});
+  currentSelect.value = props.value
+})
 
 watch(
   () => currentSelect.value,
   (v) => {
-    emit('update:value', v);
-    emit('change', v);
+    emit('update:value', v)
+    emit('change', v)
   },
-);
+)
 
 const handleClick = (icon: string) => {
-  currentSelect.value = icon;
-};
-
-const handlePageChange = (page: number) => {
-  currentPage.value = page;
-  setCurrentPage(page);
-};
-
-function changeOpenState() {
-  refTrigger.value?.click?.();
+  currentSelect.value = icon
 }
 
-defineExpose({ changeOpenState });
+const handlePageChange = (page: number) => {
+  currentPage.value = page
+  setCurrentPage(page)
+}
+
+function changeOpenState() {
+  refTrigger.value?.click?.()
+}
+
+defineExpose({ changeOpenState })
 </script>
 <template>
   <VbenPopover

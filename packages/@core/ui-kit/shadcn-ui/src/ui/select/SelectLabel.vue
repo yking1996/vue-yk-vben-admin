@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { SelectLabel, type SelectLabelProps } from 'radix-vue';
+import { SelectLabel, type SelectLabelProps } from 'radix-vue'
 
-const props = defineProps<{ class?: any } & SelectLabelProps>();
+const props = defineProps<{ class?: any } & SelectLabelProps>()
 </script>
 
 <template>

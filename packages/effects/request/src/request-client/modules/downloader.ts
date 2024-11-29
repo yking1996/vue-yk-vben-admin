@@ -1,13 +1,13 @@
-import type { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig } from 'axios'
 
-import type { RequestClient } from '../request-client';
-import type { RequestResponse } from '../types';
+import type { RequestClient } from '../request-client'
+import type { RequestResponse } from '../types'
 
 class FileDownloader {
-  private client: RequestClient;
+  private client: RequestClient
 
   constructor(client: RequestClient) {
-    this.client = client;
+    this.client = client
   }
 
   public async download(
@@ -17,15 +17,15 @@ class FileDownloader {
     const finalConfig: AxiosRequestConfig = {
       ...config,
       responseType: 'blob',
-    };
+    }
 
     const response = await this.client.get<RequestResponse<Blob>>(
       url,
       finalConfig,
-    );
+    )
 
-    return response;
+    return response
   }
 }
 
-export { FileDownloader };
+export { FileDownloader }

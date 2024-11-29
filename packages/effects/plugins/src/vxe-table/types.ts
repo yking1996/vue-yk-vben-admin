@@ -1,61 +1,61 @@
-import type { ClassType, DeepPartial } from '@vben/types';
-import type { VbenFormProps } from '@vben-core/form-ui';
+import type { ClassType, DeepPartial } from '@vben/types'
+import type { VbenFormProps } from '@vben-core/form-ui'
 import type {
   VxeGridListeners,
   VxeGridProps as VxeTableGridProps,
   VxeUIExport,
-} from 'vxe-table';
+} from 'vxe-table'
 
-import type { VxeGridApi } from './api';
+import type { VxeGridApi } from './api'
 
-import type { Ref } from 'vue';
+import type { Ref } from 'vue'
 
-import { useVbenForm } from '@vben-core/form-ui';
+import { useVbenForm } from '@vben-core/form-ui'
 
 export interface VxePaginationInfo {
-  currentPage: number;
-  pageSize: number;
-  total: number;
+  currentPage: number
+  pageSize: number
+  total: number
 }
 
 export interface VxeGridProps {
   /**
    * 标题
    */
-  tableTitle?: string;
+  tableTitle?: string
   /**
    * 标题帮助
    */
-  tableTitleHelp?: string;
+  tableTitleHelp?: string
   /**
    * 组件class
    */
-  class?: ClassType;
+  class?: ClassType
   /**
    * vxe-grid class
    */
-  gridClass?: ClassType;
+  gridClass?: ClassType
   /**
    * vxe-grid 配置
    */
-  gridOptions?: DeepPartial<VxeTableGridProps>;
+  gridOptions?: DeepPartial<VxeTableGridProps>
   /**
    * vxe-grid 事件
    */
-  gridEvents?: DeepPartial<VxeGridListeners>;
+  gridEvents?: DeepPartial<VxeGridListeners>
   /**
    * 表单配置
    */
-  formOptions?: VbenFormProps;
+  formOptions?: VbenFormProps
 }
 
 export type ExtendedVxeGridApi = {
   useStore: <T = NoInfer<VxeGridProps>>(
     selector?: (state: NoInfer<VxeGridProps>) => T,
-  ) => Readonly<Ref<T>>;
-} & VxeGridApi;
+  ) => Readonly<Ref<T>>
+} & VxeGridApi
 
 export interface SetupVxeTable {
-  configVxeTable: (ui: VxeUIExport) => void;
-  useVbenForm: typeof useVbenForm;
+  configVxeTable: (ui: VxeUIExport) => void
+  useVbenForm: typeof useVbenForm
 }

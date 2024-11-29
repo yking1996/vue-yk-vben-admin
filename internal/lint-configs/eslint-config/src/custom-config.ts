@@ -1,10 +1,10 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
 const restrictedImportIgnores = [
   '**/vite.config.mts',
   '**/tailwind.config.mjs',
   '**/postcss.config.mjs',
-];
+]
 
 const customConfig: Linter.Config[] = [
   // shadcn-ui 内部组件是自动生成的，不做太多限制
@@ -26,6 +26,7 @@ const customConfig: Linter.Config[] = [
     rules: {
       'perfectionist/sort-interfaces': 'off',
       'perfectionist/sort-objects': 'off',
+      semi: 'off',
     },
   },
   {
@@ -156,6 +157,6 @@ const customConfig: Linter.Config[] = [
       'no-console': 'off',
     },
   },
-];
+]
 
-export { customConfig };
+export { customConfig }

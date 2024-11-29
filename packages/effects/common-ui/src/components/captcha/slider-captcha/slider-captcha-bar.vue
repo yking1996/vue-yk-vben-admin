@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { computed, type CSSProperties, ref, useTemplateRef } from 'vue';
+import { computed, type CSSProperties, ref, useTemplateRef } from 'vue'
 
 const props = defineProps<{
-  barStyle: CSSProperties;
-  toLeft: boolean;
-}>();
+  barStyle: CSSProperties
+  toLeft: boolean
+}>()
 
-const barRef = useTemplateRef<HTMLDivElement>('barRef');
+const barRef = useTemplateRef<HTMLDivElement>('barRef')
 
-const width = ref('0');
+const width = ref('0')
 
 const style = computed(() => {
-  const { barStyle } = props;
+  const { barStyle } = props
   return {
     ...barStyle,
     width: width.value,
-  };
-});
+  }
+})
 
 defineExpose({
   getEl: () => {
-    return barRef.value;
+    return barRef.value
   },
   setWidth: (val: string) => {
-    width.value = val;
+    width.value = val
   },
-});
+})
 </script>
 
 <template>

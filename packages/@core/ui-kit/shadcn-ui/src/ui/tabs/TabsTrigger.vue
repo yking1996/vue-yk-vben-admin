@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { TabsTrigger, type TabsTriggerProps, useForwardProps } from 'radix-vue';
+import { TabsTrigger, type TabsTriggerProps, useForwardProps } from 'radix-vue'
 
-const props = defineProps<{ class?: any } & TabsTriggerProps>();
+const props = defineProps<{ class?: any } & TabsTriggerProps>()
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, ...delegated } = props
 
-  return delegated;
-});
+  return delegated
+})
 
-const forwardedProps = useForwardProps(delegatedProps);
+const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>

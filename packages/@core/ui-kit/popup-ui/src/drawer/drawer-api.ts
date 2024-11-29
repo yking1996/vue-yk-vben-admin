@@ -1,22 +1,22 @@
-import type { DrawerApiOptions, DrawerState } from './drawer';
+import type { DrawerApiOptions, DrawerState } from './drawer'
 
-import { Store } from '@vben-core/shared/store';
-import { bindMethods, isFunction } from '@vben-core/shared/utils';
+import { Store } from '@vben-core/shared/store'
+import { bindMethods, isFunction } from '@vben-core/shared/utils'
 
 export class DrawerApi {
   private api: Pick<
     DrawerApiOptions,
     'onBeforeClose' | 'onCancel' | 'onConfirm' | 'onOpenChange'
-  >;
+  >
   // private prevState!: DrawerState;
-  private state!: DrawerState;
+  private state!: DrawerState
 
   // 共享数据
   public sharedData: Record<'payload', any> = {
     payload: {},
-  };
+  }
 
-  public store: Store<DrawerState>;
+  public store: Store<DrawerState>
 
   constructor(options: DrawerApiOptions = {}) {
     const {
@@ -26,7 +26,7 @@ export class DrawerApi {
       onConfirm,
       onOpenChange,
       ...storeState
-    } = options;
+    } = options
 
     const defaultState: DrawerState = {
       class: '',
@@ -45,7 +45,7 @@ export class DrawerApi {
       showCancelButton: true,
       showConfirmButton: true,
       title: '',
-    };
+    }
 
     this.store = new Store<DrawerState>(
       {
@@ -54,29 +54,29 @@ export class DrawerApi {
       },
       {
         onUpdate: () => {
-          const state = this.store.state;
+          const state = this.store.state
           if (state?.isOpen === this.state?.isOpen) {
-            this.state = state;
+            this.state = state
           } else {
-            this.state = state;
-            this.api.onOpenChange?.(!!state?.isOpen);
+            this.state = state
+            this.api.onOpenChange?.(!!state?.isOpen)
           }
         },
       },
-    );
-    this.state = this.store.state;
+    )
+    this.state = this.store.state
     this.api = {
       onBeforeClose,
       onCancel,
       onConfirm,
       onOpenChange,
-    };
-    bindMethods(this);
+    }
+    bindMethods(this)
   }
 
   // 如果需要多次更新状态，可以使用 batch 方法
   batchStore(cb: () => void) {
-    this.store.batch(cb);
+    this.store.batch(cb)
   }
 
   /**
@@ -85,14 +85,14 @@ export class DrawerApi {
   close() {
     // 通过 onBeforeClose 钩子函数来判断是否允许关闭弹窗
     // 如果 onBeforeClose 返回 false，则不关闭弹窗
-    const allowClose = this.api.onBeforeClose?.() ?? true;
+    const allowClose = this.api.onBeforeClose?.() ?? true
     if (allowClose) {
-      this.store.setState((prev) => ({ ...prev, isOpen: false }));
+      this.store.setState((prev) => ({ ...prev, isOpen: false }))
     }
   }
 
   getData<T extends object = Record<string, any>>() {
-    return (this.sharedData?.payload ?? {}) as T;
+    return (this.sharedData?.payload ?? {}) as T
   }
 
   /**
@@ -100,9 +100,9 @@ export class DrawerApi {
    */
   onCancel() {
     if (this.api.onCancel) {
-      this.api.onCancel?.();
+      this.api.onCancel?.()
     } else {
-      this.close();
+      this.close()
     }
   }
 
@@ -110,15 +110,15 @@ export class DrawerApi {
    * 确认操作
    */
   onConfirm() {
-    this.api.onConfirm?.();
+    this.api.onConfirm?.()
   }
 
   open() {
-    this.store.setState((prev) => ({ ...prev, isOpen: true }));
+    this.store.setState((prev) => ({ ...prev, isOpen: true }))
   }
 
   setData<T>(payload: T) {
-    this.sharedData.payload = payload;
+    this.sharedData.payload = payload
   }
 
   setState(
@@ -127,9 +127,9 @@ export class DrawerApi {
       | Partial<DrawerState>,
   ) {
     if (isFunction(stateOrFn)) {
-      this.store.setState(stateOrFn);
+      this.store.setState(stateOrFn)
     } else {
-      this.store.setState((prev) => ({ ...prev, ...stateOrFn }));
+      this.store.setState((prev) => ({ ...prev, ...stateOrFn }))
     }
   }
 }

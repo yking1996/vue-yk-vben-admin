@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
 
-import { EllipsisText } from '..';
+import { EllipsisText } from '..'
 
 describe('ellipsis-text.vue', () => {
   it('renders the correct content and truncates text', async () => {
@@ -13,13 +13,13 @@ describe('ellipsis-text.vue', () => {
       slots: {
         default: 'This is a very long text that should be truncated.',
       },
-    });
+    })
 
-    expect(wrapper.text()).toContain('This is a very long text');
+    expect(wrapper.text()).toContain('This is a very long text')
     // 检查 ellipsis 是否应用了正确的 class
-    const ellipsis = wrapper.find('.truncate');
-    expect(ellipsis.exists()).toBe(true);
-  });
+    const ellipsis = wrapper.find('.truncate')
+    expect(ellipsis.exists()).toBe(true)
+  })
 
   it('expands text on click if expand is true', async () => {
     const wrapper = mount(EllipsisText, {
@@ -30,17 +30,17 @@ describe('ellipsis-text.vue', () => {
       slots: {
         default: 'This is a very long text that should be truncated.',
       },
-    });
-    const ellipsis = wrapper.find('.truncate');
+    })
+    const ellipsis = wrapper.find('.truncate')
 
     // 点击 ellipsis，应该触发 expandChange，参数为 false
-    await ellipsis.trigger('click');
-    expect(wrapper.emitted('expandChange')).toBeTruthy();
-    expect(wrapper.emitted('expandChange')?.[0]).toEqual([true]);
+    await ellipsis.trigger('click')
+    expect(wrapper.emitted('expandChange')).toBeTruthy()
+    expect(wrapper.emitted('expandChange')?.[0]).toEqual([true])
 
     // 再次点击，应该触发 expandChange，参数为 false
-    await ellipsis.trigger('click');
-    expect(wrapper.emitted('expandChange')?.length).toBe(2);
-    expect(wrapper.emitted('expandChange')?.[1]).toEqual([false]);
-  });
-});
+    await ellipsis.trigger('click')
+    expect(wrapper.emitted('expandChange')?.length).toBe(2)
+    expect(wrapper.emitted('expandChange')?.[1]).toEqual([false])
+  })
+})

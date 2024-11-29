@@ -1,43 +1,43 @@
 <script setup lang="ts">
-import type { ExtendedFormApi, VbenFormProps } from './types';
+import type { ExtendedFormApi, VbenFormProps } from './types'
 
 // import { toRaw, watch } from 'vue';
 
-import { useForwardPriorityValues } from '@vben-core/composables';
+import { useForwardPriorityValues } from '@vben-core/composables'
 // import { isFunction } from '@vben-core/shared/utils';
 
-import { useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue'
 
-import FormActions from './components/form-actions.vue';
+import FormActions from './components/form-actions.vue'
 import {
   COMPONENT_BIND_EVENT_MAP,
   COMPONENT_MAP,
   DEFAULT_FORM_COMMON_CONFIG,
-} from './config';
-import { Form } from './form-render';
-import { provideFormProps, useFormInitial } from './use-form-context';
+} from './config'
+import { Form } from './form-render'
+import { provideFormProps, useFormInitial } from './use-form-context'
 // 通过 extends 会导致热更新卡死，所以重复写了一遍
 interface Props extends VbenFormProps {
-  formApi: ExtendedFormApi;
+  formApi: ExtendedFormApi
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
-const formActionsRef = useTemplateRef<typeof FormActions>('formActionsRef');
+const formActionsRef = useTemplateRef<typeof FormActions>('formActionsRef')
 
-const state = props.formApi?.useStore?.();
+const state = props.formApi?.useStore?.()
 
-const forward = useForwardPriorityValues(props, state);
+const forward = useForwardPriorityValues(props, state)
 
-const { delegatedSlots, form } = useFormInitial(forward);
+const { delegatedSlots, form } = useFormInitial(forward)
 
-provideFormProps([forward, form]);
+provideFormProps([forward, form])
 
-props.formApi?.mount?.(form);
+props.formApi?.mount?.(form)
 
 const handleUpdateCollapsed = (value: boolean) => {
-  props.formApi?.setState({ collapsed: !!value });
-};
+  props.formApi?.setState({ collapsed: !!value })
+}
 
 function handleKeyDownEnter(event: KeyboardEvent) {
   if (
@@ -45,16 +45,16 @@ function handleKeyDownEnter(event: KeyboardEvent) {
     !formActionsRef.value ||
     !formActionsRef.value.handleSubmit
   ) {
-    return;
+    return
   }
   // 如果是 textarea 不阻止默认行为，否则会导致无法换行。
   // 跳过 textarea 的回车提交处理
   if (event.target instanceof HTMLTextAreaElement) {
-    return;
+    return
   }
-  event.preventDefault();
+  event.preventDefault()
 
-  formActionsRef.value?.handleSubmit?.();
+  formActionsRef.value?.handleSubmit?.()
 }
 </script>
 

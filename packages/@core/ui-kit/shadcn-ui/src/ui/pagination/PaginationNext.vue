@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { ChevronRight } from 'lucide-vue-next';
-import { PaginationNext, type PaginationNextProps } from 'radix-vue';
+import { ChevronRight } from 'lucide-vue-next'
+import { PaginationNext, type PaginationNextProps } from 'radix-vue'
 
-import { Button } from '../button';
+import { Button } from '../button'
 
 const props = withDefaults(
   defineProps<{ class?: any } & PaginationNextProps>(),
   {
     asChild: true,
   },
-);
+)
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, ...delegated } = props
 
-  return delegated;
-});
+  return delegated
+})
 </script>
 
 <template>

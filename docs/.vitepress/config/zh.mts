@@ -1,6 +1,6 @@
-import { type DefaultTheme, defineConfig } from 'vitepress';
+import { type DefaultTheme, defineConfig } from 'vitepress'
 
-import { version } from '../../../package.json';
+import { version } from '../../../package.json'
 
 export const zh = defineConfig({
   description: 'Vben Admin & 企业级管理系统框架',
@@ -44,7 +44,7 @@ export const zh = defineConfig({
     },
     sidebarMenuLabel: '菜单',
   },
-});
+})
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
@@ -117,7 +117,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { link: 'other/faq', text: '常见问题' },
       ],
     },
-  ];
+  ]
 }
 
 function sidebarCommercial(): DefaultTheme.SidebarItem[] {
@@ -134,7 +134,7 @@ function sidebarCommercial(): DefaultTheme.SidebarItem[] {
       link: 'customized',
       text: '定制开发',
     },
-  ];
+  ]
 }
 
 function sidebarComponents(): DefaultTheme.SidebarItem[] {
@@ -174,7 +174,7 @@ function sidebarComponents(): DefaultTheme.SidebarItem[] {
         },
       ],
     },
-  ];
+  ]
 }
 
 function nav(): DefaultTheme.NavItem[] {
@@ -286,7 +286,7 @@ function nav(): DefaultTheme.NavItem[] {
     //   link: '/friend-links/',
     //   text: '🤝 友情链接',
     // },
-  ];
+  ]
 }
 
 export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
@@ -331,4 +331,4 @@ export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
       },
     },
   },
-};
+}

@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
+import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue'
 
 interface Props {
-  title?: string;
-  description?: string;
-  contentClass?: string;
+  title?: string
+  description?: string
+  contentClass?: string
   /**
    * 根据content可见高度自适应
    */
-  autoContentHeight?: boolean;
+  autoContentHeight?: boolean
 }
 
 defineOptions({
   name: 'Page',
-});
+})
 
 const {
   contentClass = '',
   description = '',
   autoContentHeight = false,
   title = '',
-} = defineProps<Props>();
+} = defineProps<Props>()
 
-const headerHeight = ref(0);
-const footerHeight = ref(0);
-const shouldAutoHeight = ref(false);
+const headerHeight = ref(0)
+const footerHeight = ref(0)
+const shouldAutoHeight = ref(false)
 
-const headerRef = useTemplateRef<HTMLDivElement>('headerRef');
-const footerRef = useTemplateRef<HTMLDivElement>('footerRef');
+const headerRef = useTemplateRef<HTMLDivElement>('headerRef')
+const footerRef = useTemplateRef<HTMLDivElement>('footerRef')
 
 const contentStyle = computed(() => {
   if (autoContentHeight) {
@@ -36,26 +36,26 @@ const contentStyle = computed(() => {
         ? `calc(var(--vben-content-height) - ${headerHeight.value}px - ${footerHeight.value}px)`
         : '0',
       // 'overflow-y': shouldAutoHeight.value?'auto':'unset',
-    };
+    }
   }
-  return {};
-});
+  return {}
+})
 
 async function calcContentHeight() {
   if (!autoContentHeight) {
-    return;
+    return
   }
-  await nextTick();
-  headerHeight.value = headerRef.value?.offsetHeight || 0;
-  footerHeight.value = footerRef.value?.offsetHeight || 0;
+  await nextTick()
+  headerHeight.value = headerRef.value?.offsetHeight || 0
+  footerHeight.value = footerRef.value?.offsetHeight || 0
   setTimeout(() => {
-    shouldAutoHeight.value = true;
-  }, 30);
+    shouldAutoHeight.value = true
+  }, 30)
 }
 
 onMounted(() => {
-  calcContentHeight();
-});
+  calcContentHeight()
+})
 </script>
 
 <template>

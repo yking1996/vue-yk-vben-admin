@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { SelectOption } from '@vben/types';
+import type { SelectOption } from '@vben/types'
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { $t } from '@vben/locales';
+import { $t } from '@vben/locales'
 
-import SelectItem from '../select-item.vue';
-import SwitchItem from '../switch-item.vue';
+import SelectItem from '../select-item.vue'
+import SwitchItem from '../switch-item.vue'
 
 defineOptions({
   name: 'PreferenceTabsConfig',
-});
+})
 
-defineProps<{ disabled?: boolean }>();
+defineProps<{ disabled?: boolean }>()
 
-const tabbarEnable = defineModel<boolean>('tabbarEnable');
-const tabbarShowIcon = defineModel<boolean>('tabbarShowIcon');
-const tabbarPersist = defineModel<boolean>('tabbarPersist');
-const tabbarDraggable = defineModel<boolean>('tabbarDraggable');
-const tabbarStyleType = defineModel<string>('tabbarStyleType');
-const tabbarShowMore = defineModel<boolean>('tabbarShowMore');
-const tabbarShowMaximize = defineModel<boolean>('tabbarShowMaximize');
+const tabbarEnable = defineModel<boolean>('tabbarEnable')
+const tabbarShowIcon = defineModel<boolean>('tabbarShowIcon')
+const tabbarPersist = defineModel<boolean>('tabbarPersist')
+const tabbarDraggable = defineModel<boolean>('tabbarDraggable')
+const tabbarStyleType = defineModel<string>('tabbarStyleType')
+const tabbarShowMore = defineModel<boolean>('tabbarShowMore')
+const tabbarShowMaximize = defineModel<boolean>('tabbarShowMaximize')
 
 const styleItems = computed((): SelectOption[] => [
   {
@@ -40,7 +40,7 @@ const styleItems = computed((): SelectOption[] => [
     label: $t('preferences.tabbar.styleType.brisk'),
     value: 'brisk',
   },
-]);
+])
 </script>
 
 <template>

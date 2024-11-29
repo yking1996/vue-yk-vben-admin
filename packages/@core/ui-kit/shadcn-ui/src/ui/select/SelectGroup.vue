@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { SelectGroup, type SelectGroupProps } from 'radix-vue';
+import { SelectGroup, type SelectGroupProps } from 'radix-vue'
 
-const props = defineProps<{ class?: any } & SelectGroupProps>();
+const props = defineProps<{ class?: any } & SelectGroupProps>()
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, ...delegated } = props
 
-  return delegated;
-});
+  return delegated
+})
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { LayoutType } from '@vben/types';
+import type { LayoutType } from '@vben/types'
 
-import { type Component, computed } from 'vue';
+import { type Component, computed } from 'vue'
 
-import { CircleHelp } from '@vben/icons';
-import { $t } from '@vben/locales';
-import { VbenTooltip } from '@vben-core/shadcn-ui';
+import { CircleHelp } from '@vben/icons'
+import { $t } from '@vben/locales'
+import { VbenTooltip } from '@vben-core/shadcn-ui'
 
 import {
   FullContent,
@@ -13,19 +13,19 @@ import {
   MixedNav,
   SidebarMixedNav,
   SidebarNav,
-} from '../../icons';
+} from '../../icons'
 
 interface PresetItem {
-  name: string;
-  tip: string;
-  type: LayoutType;
+  name: string
+  tip: string
+  type: LayoutType
 }
 
 defineOptions({
   name: 'PreferenceLayout',
-});
+})
 
-const modelValue = defineModel<LayoutType>({ default: 'sidebar-nav' });
+const modelValue = defineModel<LayoutType>({ default: 'sidebar-nav' })
 
 const components: Record<LayoutType, Component> = {
   'full-content': FullContent,
@@ -33,7 +33,7 @@ const components: Record<LayoutType, Component> = {
   'mixed-nav': MixedNav,
   'sidebar-mixed-nav': SidebarMixedNav,
   'sidebar-nav': SidebarNav,
-};
+}
 
 const PRESET = computed((): PresetItem[] => [
   {
@@ -61,10 +61,10 @@ const PRESET = computed((): PresetItem[] => [
     tip: $t('preferences.fullContentTip'),
     type: 'full-content',
   },
-]);
+])
 
 function activeClass(theme: string): string[] {
-  return theme === modelValue.value ? ['outline-box-active'] : [];
+  return theme === modelValue.value ? ['outline-box-active'] : []
 }
 </script>
 

@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
-import { computed } from 'vue';
+import type { CSSProperties } from 'vue'
+import { computed } from 'vue'
 
 interface Props {
   /**
    * 高度
    */
-  height: number;
+  height: number
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {})
 
 const style = computed((): CSSProperties => {
-  const { height } = props;
+  const { height } = props
   return {
     height: `${height}px`,
-  };
-});
+  }
+})
 </script>
 
 <template>

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { DrawerProps, ExtendedDrawerApi } from './drawer';
+import type { DrawerProps, ExtendedDrawerApi } from './drawer'
 
-import { provide, ref, useId, watch } from 'vue';
+import { provide, ref, useId, watch } from 'vue'
 
 import {
   useIsMobile,
   usePriorityValues,
   useSimpleLocale,
-} from '@vben-core/composables';
-import { X } from '@vben-core/icons';
+} from '@vben-core/composables'
+import { X } from '@vben-core/icons'
 import {
   Sheet,
   SheetClose,
@@ -22,28 +22,28 @@ import {
   VbenIconButton,
   VbenLoading,
   VisuallyHidden,
-} from '@vben-core/shadcn-ui';
-import { globalShareState } from '@vben-core/shared/global-state';
-import { cn } from '@vben-core/shared/utils';
+} from '@vben-core/shadcn-ui'
+import { globalShareState } from '@vben-core/shared/global-state'
+import { cn } from '@vben-core/shared/utils'
 
 interface Props extends DrawerProps {
-  drawerApi?: ExtendedDrawerApi;
+  drawerApi?: ExtendedDrawerApi
 }
 
 const props = withDefaults(defineProps<Props>(), {
   drawerApi: undefined,
-});
+})
 
-const components = globalShareState.getComponents();
+const components = globalShareState.getComponents()
 
-const id = useId();
-provide('DISMISSABLE_DRAWER_ID', id);
+const id = useId()
+provide('DISMISSABLE_DRAWER_ID', id)
 
-const wrapperRef = ref<HTMLElement>();
-const { $t } = useSimpleLocale();
-const { isMobile } = useIsMobile();
+const wrapperRef = ref<HTMLElement>()
+const { $t } = useSimpleLocale()
+const { isMobile } = useIsMobile()
 
-const state = props.drawerApi?.useStore?.();
+const state = props.drawerApi?.useStore?.()
 
 const {
   cancelText,
@@ -67,7 +67,7 @@ const {
   showConfirmButton,
   title,
   titleTooltip,
-} = usePriorityValues(props, state);
+} = usePriorityValues(props, state)
 
 watch(
   () => showLoading.value,
@@ -76,39 +76,39 @@ watch(
       wrapperRef.value.scrollTo({
         // behavior: 'smooth',
         top: 0,
-      });
+      })
     }
   },
-);
+)
 
 function interactOutside(e: Event) {
   if (!closeOnClickModal.value) {
-    e.preventDefault();
+    e.preventDefault()
   }
 }
 function escapeKeyDown(e: KeyboardEvent) {
   if (!closeOnPressEscape.value) {
-    e.preventDefault();
+    e.preventDefault()
   }
 }
 // pointer-down-outside
 function pointerDownOutside(e: Event) {
-  const target = e.target as HTMLElement;
-  const dismissableDrawer = target?.dataset.dismissableDrawer;
+  const target = e.target as HTMLElement
+  const dismissableDrawer = target?.dataset.dismissableDrawer
   if (!closeOnClickModal.value || dismissableDrawer !== id) {
-    e.preventDefault();
+    e.preventDefault()
   }
 }
 
 function handerOpenAutoFocus(e: Event) {
   if (!openAutoFocus.value) {
-    e?.preventDefault();
+    e?.preventDefault()
   }
 }
 
 function handleFocusOutside(e: Event) {
-  e.preventDefault();
-  e.stopPropagation();
+  e.preventDefault()
+  e.stopPropagation()
 }
 </script>
 <template>

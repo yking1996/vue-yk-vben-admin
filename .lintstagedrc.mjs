@@ -17,4 +17,4 @@ export default {
     'prettier --cache --write--parser json',
   ],
   'package.json': ['prettier --cache --write'],
-};
+}

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 
 import {
   EchartsUI,
   type EchartsUIType,
   useEcharts,
-} from '@vben/plugins/echarts';
+} from '@vben/plugins/echarts'
 
-const chartRef = ref<EchartsUIType>();
-const { renderEcharts } = useEcharts(chartRef);
+const chartRef = ref<EchartsUIType>()
+const { renderEcharts } = useEcharts(chartRef)
 
 onMounted(() => {
   renderEcharts({
@@ -19,7 +19,7 @@ onMounted(() => {
     series: [
       {
         animationDelay() {
-          return Math.random() * 100;
+          return Math.random() * 100
         },
         animationEasing: 'exponentialInOut',
         animationType: 'scale',
@@ -58,8 +58,8 @@ onMounted(() => {
     tooltip: {
       trigger: 'item',
     },
-  });
-});
+  })
+})
 </script>
 
 <template>

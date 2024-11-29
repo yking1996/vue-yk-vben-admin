@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import type { ClassType } from '@vben-core/typings';
-import type { TooltipContentProps } from 'radix-vue';
+import type { ClassType } from '@vben-core/typings'
+import type { TooltipContentProps } from 'radix-vue'
 
-import type { StyleValue } from 'vue';
+import type { StyleValue } from 'vue'
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../ui';
+} from '../../ui'
 
 interface Props {
-  contentClass?: ClassType;
-  contentStyle?: StyleValue;
-  delayDuration?: number;
-  side?: TooltipContentProps['side'];
+  contentClass?: ClassType
+  contentStyle?: StyleValue
+  delayDuration?: number
+  side?: TooltipContentProps['side']
 }
 
 withDefaults(defineProps<Props>(), {
   delayDuration: 0,
   side: 'right',
-});
+})
 </script>
 
 <template>

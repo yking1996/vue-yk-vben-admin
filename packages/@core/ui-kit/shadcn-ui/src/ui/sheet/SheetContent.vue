@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
 import {
   DialogContent,
@@ -9,25 +9,25 @@ import {
   type DialogContentProps,
   DialogPortal,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'radix-vue'
 
-import { type SheetVariants, sheetVariants } from './sheet';
-import SheetOverlay from './SheetOverlay.vue';
+import { type SheetVariants, sheetVariants } from './sheet'
+import SheetOverlay from './SheetOverlay.vue'
 
 interface SheetContentProps extends DialogContentProps {
-  class?: any;
-  modal?: boolean;
-  open?: boolean;
-  side?: SheetVariants['side'];
+  class?: any
+  modal?: boolean
+  open?: boolean
+  side?: SheetVariants['side']
 }
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = defineProps<SheetContentProps>();
+const props = defineProps<SheetContentProps>()
 
-const emits = defineEmits<DialogContentEmits>();
+const emits = defineEmits<DialogContentEmits>()
 
 const delegatedProps = computed(() => {
   const {
@@ -36,12 +36,12 @@ const delegatedProps = computed(() => {
     open: _open,
     side: _side,
     ...delegated
-  } = props;
+  } = props
 
-  return delegated;
-});
+  return delegated
+})
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

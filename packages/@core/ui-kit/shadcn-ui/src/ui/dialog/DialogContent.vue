@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@vben-core/typings'
 
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { X } from 'lucide-vue-next';
+import { X } from 'lucide-vue-next'
 import {
   DialogClose,
   DialogContent,
@@ -13,25 +13,25 @@ import {
   type DialogContentProps,
   DialogPortal,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'radix-vue'
 
-import DialogOverlay from './DialogOverlay.vue';
+import DialogOverlay from './DialogOverlay.vue'
 
 const props = withDefaults(
   defineProps<
     {
-      class?: ClassType;
-      closeClass?: ClassType;
-      modal?: boolean;
-      open?: boolean;
-      showClose?: boolean;
+      class?: ClassType
+      closeClass?: ClassType
+      modal?: boolean
+      open?: boolean
+      showClose?: boolean
     } & DialogContentProps
   >(),
   { showClose: true },
-);
+)
 const emits = defineEmits<
   { close: []; closed: []; opened: [] } & DialogContentEmits
->();
+>()
 
 const delegatedProps = computed(() => {
   const {
@@ -40,27 +40,27 @@ const delegatedProps = computed(() => {
     open: _open,
     showClose: __,
     ...delegated
-  } = props;
+  } = props
 
-  return delegated;
-});
+  return delegated
+})
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
-const contentRef = ref<InstanceType<typeof DialogContent> | null>(null);
+const contentRef = ref<InstanceType<typeof DialogContent> | null>(null)
 function onAnimationEnd(event: AnimationEvent) {
   // 只有在 contentRef 的动画结束时才触发 opened/closed 事件
   if (event.target === contentRef.value?.$el) {
     if (props.open) {
-      emits('opened');
+      emits('opened')
     } else {
-      emits('closed');
+      emits('closed')
     }
   }
 }
 defineExpose({
   getContentRef: () => contentRef.value,
-});
+})
 </script>
 
 <template>

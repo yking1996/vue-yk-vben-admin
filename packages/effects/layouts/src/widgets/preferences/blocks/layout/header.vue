@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { LayoutHeaderModeType, SelectOption } from '@vben/types';
+import type { LayoutHeaderModeType, SelectOption } from '@vben/types'
 
-import { $t } from '@vben/locales';
+import { $t } from '@vben/locales'
 
-import SelectItem from '../select-item.vue';
-import SwitchItem from '../switch-item.vue';
+import SelectItem from '../select-item.vue'
+import SwitchItem from '../switch-item.vue'
 
-defineProps<{ disabled: boolean }>();
+defineProps<{ disabled: boolean }>()
 
-const headerEnable = defineModel<boolean>('headerEnable');
-const headerMode = defineModel<LayoutHeaderModeType>('headerMode');
+const headerEnable = defineModel<boolean>('headerEnable')
+const headerMode = defineModel<LayoutHeaderModeType>('headerMode')
 
 const localeItems: SelectOption[] = [
   {
@@ -28,7 +28,7 @@ const localeItems: SelectOption[] = [
     label: $t('preferences.header.modeAutoScroll'),
     value: 'auto-scroll',
   },
-];
+]
 </script>
 
 <template>

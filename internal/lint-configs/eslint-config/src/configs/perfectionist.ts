@@ -1,6 +1,6 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import perfectionistPlugin from 'eslint-plugin-perfectionist'
 
 export async function perfectionist(): Promise<Linter.Config[]> {
   return [
@@ -108,5 +108,5 @@ export async function perfectionist(): Promise<Linter.Config[]> {
         ],
       },
     },
-  ];
+  ]
 }

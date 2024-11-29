@@ -1,16 +1,16 @@
-import type { Recordable } from '@vben/types';
-import type { VxeGridProps, VxeUIExport } from 'vxe-table';
+import type { Recordable } from '@vben/types'
+import type { VxeGridProps, VxeUIExport } from 'vxe-table'
 
-import type { VxeGridApi } from './api';
+import type { VxeGridApi } from './api'
 
-import { formatDate, formatDateTime, isFunction } from '@vben/utils';
+import { formatDate, formatDateTime, isFunction } from '@vben/utils'
 
 export function extendProxyOptions(
   api: VxeGridApi,
   options: VxeGridProps,
   getFormValues: () => Recordable<any>,
 ) {
-  [
+  ;[
     'query',
     'querySuccess',
     'queryError',
@@ -18,8 +18,8 @@ export function extendProxyOptions(
     'queryAllSuccess',
     'queryAllError',
   ].forEach((key) => {
-    extendProxyOption(key, api, options, getFormValues);
-  });
+    extendProxyOption(key, api, options, getFormValues)
+  })
 }
 
 function extendProxyOption(
@@ -28,10 +28,10 @@ function extendProxyOption(
   options: VxeGridProps,
   getFormValues: () => Recordable<any>,
 ) {
-  const { proxyConfig } = options;
-  const configFn = (proxyConfig?.ajax as Recordable<any>)?.[key];
+  const { proxyConfig } = options
+  const configFn = (proxyConfig?.ajax as Recordable<any>)?.[key]
   if (!isFunction(configFn)) {
-    return options;
+    return options
   }
 
   const wrapperFn = async (
@@ -39,7 +39,7 @@ function extendProxyOption(
     customValues: Recordable<any>,
     ...args: Recordable<any>[]
   ) => {
-    const formValues = getFormValues();
+    const formValues = getFormValues()
     const data = await configFn(
       params,
       {
@@ -47,9 +47,9 @@ function extendProxyOption(
         ...formValues,
       },
       ...args,
-    );
-    return data;
-  };
+    )
+    return data
+  }
   api.setState({
     gridOptions: {
       proxyConfig: {
@@ -58,19 +58,19 @@ function extendProxyOption(
         },
       },
     },
-  });
+  })
 }
 
 export function extendsDefaultFormatter(vxeUI: VxeUIExport) {
   vxeUI.formats.add('formatDate', {
     tableCellFormatMethod({ cellValue }) {
-      return formatDate(cellValue);
+      return formatDate(cellValue)
     },
-  });
+  })
 
   vxeUI.formats.add('formatDateTime', {
     tableCellFormatMethod({ cellValue }) {
-      return formatDateTime(cellValue);
+      return formatDateTime(cellValue)
     },
-  });
+  })
 }

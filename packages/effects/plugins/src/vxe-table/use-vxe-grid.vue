@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { VbenFormProps } from '@vben-core/form-ui';
+import type { VbenFormProps } from '@vben-core/form-ui'
 import type {
   VxeGridInstance,
   VxeGridProps as VxeTableGridProps,
-} from 'vxe-table';
+} from 'vxe-table'
 
-import type { ExtendedVxeGridApi, VxeGridProps } from './types';
+import type { ExtendedVxeGridApi, VxeGridProps } from './types'
 
 import {
   computed,
@@ -16,38 +16,38 @@ import {
   useSlots,
   useTemplateRef,
   watch,
-} from 'vue';
+} from 'vue'
 
-import { usePriorityValues } from '@vben/hooks';
-import { EmptyIcon } from '@vben/icons';
-import { $t } from '@vben/locales';
-import { usePreferences } from '@vben/preferences';
-import { cloneDeep, cn, mergeWithArrayOverride } from '@vben/utils';
-import { VbenHelpTooltip, VbenLoading } from '@vben-core/shadcn-ui';
+import { usePriorityValues } from '@vben/hooks'
+import { EmptyIcon } from '@vben/icons'
+import { $t } from '@vben/locales'
+import { usePreferences } from '@vben/preferences'
+import { cloneDeep, cn, mergeWithArrayOverride } from '@vben/utils'
+import { VbenHelpTooltip, VbenLoading } from '@vben-core/shadcn-ui'
 
-import { VxeGrid, VxeUI } from 'vxe-table';
+import { VxeGrid, VxeUI } from 'vxe-table'
 
-import { extendProxyOptions } from './extends';
-import { useTableForm } from './init';
+import { extendProxyOptions } from './extends'
+import { useTableForm } from './init'
 
-import 'vxe-table/styles/cssvar.scss';
-import 'vxe-pc-ui/styles/cssvar.scss';
-import './style.css';
+import 'vxe-table/styles/cssvar.scss'
+import 'vxe-pc-ui/styles/cssvar.scss'
+import './style.css'
 
 interface Props extends VxeGridProps {
-  api: ExtendedVxeGridApi;
+  api: ExtendedVxeGridApi
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {})
 
-const FORM_SLOT_PREFIX = 'form-';
+const FORM_SLOT_PREFIX = 'form-'
 
-const TOOLBAR_ACTIONS = 'toolbar-actions';
-const TOOLBAR_TOOLS = 'toolbar-tools';
+const TOOLBAR_ACTIONS = 'toolbar-actions'
+const TOOLBAR_TOOLS = 'toolbar-tools'
 
-const gridRef = useTemplateRef<VxeGridInstance>('gridRef');
+const gridRef = useTemplateRef<VxeGridInstance>('gridRef')
 
-const state = props.api?.useStore?.();
+const state = props.api?.useStore?.()
 
 const {
   gridOptions,
@@ -57,23 +57,23 @@ const {
   formOptions,
   tableTitle,
   tableTitleHelp,
-} = usePriorityValues(props, state);
+} = usePriorityValues(props, state)
 
-const { isMobile } = usePreferences();
+const { isMobile } = usePreferences()
 
-const slots = useSlots();
+const slots = useSlots()
 
 const [Form, formApi] = useTableForm({
   handleSubmit: async () => {
-    const formValues = formApi.form.values;
-    formApi.setLatestSubmissionValues(toRaw(formValues));
-    props.api.reload(formValues);
+    const formValues = formApi.form.values
+    formApi.setLatestSubmissionValues(toRaw(formValues))
+    props.api.reload(formValues)
   },
   handleReset: async () => {
-    await formApi.resetForm();
-    const formValues = formApi.form.values;
-    formApi.setLatestSubmissionValues(formValues);
-    props.api.reload(formValues);
+    await formApi.resetForm()
+    const formValues = formApi.form.values
+    formApi.setLatestSubmissionValues(formValues)
+    props.api.reload(formValues)
   },
   commonConfig: {
     componentProps: {
@@ -85,26 +85,26 @@ const [Form, formApi] = useTableForm({
     content: $t('common.query'),
   },
   wrapperClass: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-});
+})
 
 const showTableTitle = computed(() => {
-  return !!slots.tableTitle?.() || tableTitle.value;
-});
+  return !!slots.tableTitle?.() || tableTitle.value
+})
 
 const showToolbar = computed(() => {
   return (
     !!slots[TOOLBAR_ACTIONS]?.() ||
     !!slots[TOOLBAR_TOOLS]?.() ||
     showTableTitle.value
-  );
-});
+  )
+})
 
 const toolbarOptions = computed(() => {
-  const slotActions = slots[TOOLBAR_ACTIONS]?.();
-  const slotTools = slots[TOOLBAR_TOOLS]?.();
+  const slotActions = slots[TOOLBAR_ACTIONS]?.()
+  const slotTools = slots[TOOLBAR_TOOLS]?.()
 
   if (!showToolbar.value) {
-    return {};
+    return {}
   }
   // 强制使用固定的toolbar配置，不允许用户自定义
   // 减少配置的复杂度，以及后续维护的成本
@@ -117,11 +117,11 @@ const toolbarOptions = computed(() => {
         ...(slotTools ? { tools: TOOLBAR_TOOLS } : {}),
       },
     },
-  };
-});
+  }
+})
 
 const options = computed(() => {
-  const globalGridConfig = VxeUI?.getConfig()?.grid ?? {};
+  const globalGridConfig = VxeUI?.getConfig()?.grid ?? {}
 
   const mergedOptions: VxeTableGridProps = cloneDeep(
     mergeWithArrayOverride(
@@ -130,13 +130,13 @@ const options = computed(() => {
       toRaw(gridOptions.value),
       globalGridConfig,
     ),
-  );
+  )
 
   if (mergedOptions.proxyConfig) {
-    const { ajax } = mergedOptions.proxyConfig;
-    mergedOptions.proxyConfig.enabled = !!ajax;
+    const { ajax } = mergedOptions.proxyConfig
+    mergedOptions.proxyConfig.enabled = !!ajax
     // 不自动加载数据, 由组件控制
-    mergedOptions.proxyConfig.autoLoad = false;
+    mergedOptions.proxyConfig.autoLoad = false
   }
 
   if (mergedOptions.pagerConfig) {
@@ -146,14 +146,14 @@ const options = computed(() => {
       'Number',
       'NextPage',
       'NextJump',
-    ] as any;
+    ] as any
     const layouts = [
       'Total',
       'Sizes',
       'Home',
       ...mobileLayouts,
       'End',
-    ] as readonly string[];
+    ] as readonly string[]
     mergedOptions.pagerConfig = mergeWithArrayOverride(
       {},
       mergedOptions.pagerConfig,
@@ -165,71 +165,71 @@ const options = computed(() => {
         layouts: isMobile.value ? mobileLayouts : layouts,
         size: 'mini' as const,
       },
-    );
+    )
   }
   if (mergedOptions.formConfig) {
-    mergedOptions.formConfig.enabled = false;
+    mergedOptions.formConfig.enabled = false
   }
-  return mergedOptions;
-});
+  return mergedOptions
+})
 
 const events = computed(() => {
   return {
     ...gridEvents.value,
-  };
-});
+  }
+})
 
 const delegatedSlots = computed(() => {
-  const resultSlots: string[] = [];
+  const resultSlots: string[] = []
 
   for (const key of Object.keys(slots)) {
     if (!['empty', 'form', 'loading', TOOLBAR_ACTIONS].includes(key)) {
-      resultSlots.push(key);
+      resultSlots.push(key)
     }
   }
-  return resultSlots;
-});
+  return resultSlots
+})
 
 const delegatedFormSlots = computed(() => {
-  const resultSlots: string[] = [];
+  const resultSlots: string[] = []
 
   for (const key of Object.keys(slots)) {
     if (key.startsWith(FORM_SLOT_PREFIX)) {
-      resultSlots.push(key);
+      resultSlots.push(key)
     }
   }
-  return resultSlots.map((key) => key.replace(FORM_SLOT_PREFIX, ''));
-});
+  return resultSlots.map((key) => key.replace(FORM_SLOT_PREFIX, ''))
+})
 
 async function init() {
-  await nextTick();
-  const globalGridConfig = VxeUI?.getConfig()?.grid ?? {};
+  await nextTick()
+  const globalGridConfig = VxeUI?.getConfig()?.grid ?? {}
   const defaultGridOptions: VxeTableGridProps = mergeWithArrayOverride(
     {},
     toRaw(gridOptions.value),
     toRaw(globalGridConfig),
-  );
+  )
   // 内部主动加载数据，防止form的默认值影响
-  const autoLoad = defaultGridOptions.proxyConfig?.autoLoad;
-  const enableProxyConfig = options.value.proxyConfig?.enabled;
+  const autoLoad = defaultGridOptions.proxyConfig?.autoLoad
+  const enableProxyConfig = options.value.proxyConfig?.enabled
   if (enableProxyConfig && autoLoad) {
-    props.api.reload(formApi.form?.values ?? {});
+    props.api.reload(formApi.form?.values ?? {})
   }
 
   // form 由 vben-form代替，所以不适配formConfig，这里给出警告
-  const formConfig = gridOptions.value?.formConfig;
+  const formConfig = gridOptions.value?.formConfig
   // 处理某个页面加载多个Table时，第2个之后的Table初始化报出警告
   // 因为第一次初始化之后会把defaultGridOptions和gridOptions合并后缓存进State
   if (formConfig && formConfig.enabled) {
     console.warn(
       '[Vben Vxe Table]: The formConfig in the grid is not supported, please use the `formOptions` props',
-    );
+    )
   }
-  props.api?.setState?.({ gridOptions: defaultGridOptions });
+  props.api?.setState?.({ gridOptions: defaultGridOptions })
   // form 由 vben-form 代替，所以需要保证query相关事件可以拿到参数
   extendProxyOptions(props.api, defaultGridOptions, () =>
     formApi.getLatestSubmissionValues(),
-  );
+  )
 }
 
 // formOptions支持响应式
@@ -241,27 +241,27 @@ watch(
         {},
         formOptions.value,
         prev,
-      );
+      )
       return {
         ...finalFormOptions,
         collapseTriggerResize: !!finalFormOptions.showCollapseButton,
-      };
-    });
+      }
+    })
   },
   {
     immediate: true,
   },
-);
+)
 
 onMounted(() => {
-  props.api?.mount?.(gridRef.value, formApi);
-  init();
-});
+  props.api?.mount?.(gridRef.value, formApi)
+  init()
+})
 
 onUnmounted(() => {
-  formApi?.unmount?.();
-  props.api?.unmount?.();
-});
+  formApi?.unmount?.()
+  props.api?.unmount?.()
+})
 </script>
 
 <template>

@@ -1,7 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
-import { BasicLayout } from '#/layouts';
-import { $t } from '#/locales';
+import { BasicLayout } from '#/layouts'
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -35,6 +35,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

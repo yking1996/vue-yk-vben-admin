@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
-import { AvatarRoot } from 'radix-vue';
+import { AvatarRoot } from 'radix-vue'
 
-import { avatarVariant, type AvatarVariants } from './avatar';
+import { avatarVariant, type AvatarVariants } from './avatar'
 
 const props = withDefaults(
   defineProps<{
-    class?: any;
-    shape?: AvatarVariants['shape'];
-    size?: AvatarVariants['size'];
+    class?: any
+    shape?: AvatarVariants['shape']
+    size?: AvatarVariants['size']
   }>(),
   {
     shape: 'circle',
     size: 'sm',
   },
-);
+)
 </script>
 
 <template>

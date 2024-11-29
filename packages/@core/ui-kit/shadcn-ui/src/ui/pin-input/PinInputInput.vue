@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@vben-core/shared/utils'
 
 import {
   PinInputInput,
   type PinInputInputProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'radix-vue'
 
-const props = defineProps<{ class?: any } & PinInputInputProps>();
+const props = defineProps<{ class?: any } & PinInputInputProps>()
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-  return delegated;
-});
+  const { class: _, ...delegated } = props
+  return delegated
+})
 
-const forwardedProps = useForwardProps(delegatedProps);
+const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
